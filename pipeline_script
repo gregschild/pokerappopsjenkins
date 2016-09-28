@@ -1,7 +1,5 @@
 stage('Build') {
 
-
-    "app" {
           node('standard'){
 
             git 'https://github.com/gregschild/pokerprojectops.git'
@@ -13,8 +11,8 @@ stage('Build') {
             sh 'git clone https://github.com/alanbonhamsky/pokergamefront.git /var/www/html'
             sh 'cat /var/www/html/index.html'
               }
-          }
-      "api" {
+
+
           node('standard') {
 
             git 'https://github.com/gregschild/pokerprojectops.git'
@@ -26,8 +24,8 @@ stage('Build') {
             sh 'git clone https://github.com/nathn123/PokerGame-API.git /var/www/html'
             sh 'cat /var/www/html/app.js'
           }
-        }
-      "db" {
+
+
 
            node('standard') {
 
@@ -39,7 +37,7 @@ stage('Build') {
              sh 'sudo chef-client --local-mode --runlist \'recipe[database]\''
            }
 
-       }
+
 
 
 
@@ -49,7 +47,7 @@ stage('Build') {
  stage('Deploy') {
 
 
-       "app" {
+
 
            node('greg-app-prod') {
 
@@ -63,9 +61,9 @@ stage('Build') {
 
            }
 
-       }
 
-       "api" {
+
+
 
            node('greg-api-prod') {
 
@@ -81,9 +79,9 @@ stage('Build') {
 
            }
 
-       }
 
-       "db" {
+
+
 
            node('greg-db-prod') {
 
@@ -95,7 +93,7 @@ stage('Build') {
 
            }
 
-       }
+       
 
 
 
