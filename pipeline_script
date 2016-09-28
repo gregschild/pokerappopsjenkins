@@ -42,13 +42,12 @@ stage('Build') {
        }
 
 
-   )
+
 
  }
 
  stage('Deploy') {
 
-   parallel (
 
        "app" {
 
