@@ -93,8 +93,8 @@ stage('Build') {
              sh 'curl -L https://www.opscode.com/chef/install.sh | sudo bash'
              sh 'curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P chefdk -c stable -v 0.16.28'
              sh 'sudo hostname greg.dev'
-             sh 'sudo chef-client --local-mode --runlist \'recipe[db]\''
-            
+             sh 'sudo chef-client --local-mode --runlist \'recipe[database]\''
+
            }
 
        }
