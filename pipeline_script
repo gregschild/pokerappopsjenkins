@@ -1,6 +1,6 @@
 stage('Build') {
 
-  parallel (
+
 
       "app" : {
           node('standard'){
@@ -100,6 +100,6 @@ stage('Build') {
        }
 
 
-   )
+   
 
  }
