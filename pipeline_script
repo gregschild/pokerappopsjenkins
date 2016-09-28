@@ -1,8 +1,7 @@
 stage('Build') {
 
 
-
-      "app" : {
+    "app" {
           node('standard'){
 
             git 'https://github.com/gregschild/pokerprojectops.git'
@@ -15,7 +14,7 @@ stage('Build') {
             sh 'cat /var/www/html/index.html'
               }
           },
-      "api" : {
+      "api" {
           node('standard') {
 
             git 'https://github.com/gregschild/pokerprojectops.git'
@@ -28,7 +27,7 @@ stage('Build') {
             sh 'cat /var/www/html/app.js'
           }
         },
-      "db" : {
+      "db" {
 
            node('standard') {
 
@@ -51,7 +50,7 @@ stage('Build') {
 
    parallel (
 
-       "app" : {
+       "app" {
 
            node('greg-app-prod') {
 
@@ -67,7 +66,7 @@ stage('Build') {
 
        },
 
-       "api" : {
+       "api" {
 
            node('greg-api-prod') {
 
@@ -85,7 +84,7 @@ stage('Build') {
 
        },
 
-       "db" : {
+       "db" {
 
            node('greg-db-prod') {
 
@@ -100,6 +99,6 @@ stage('Build') {
        }
 
 
-   
+
 
  }
