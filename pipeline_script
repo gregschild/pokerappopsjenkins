@@ -1,6 +1,6 @@
 stage('Build') {
 
-          node('standard'){
+          node('greg'){
 
             git 'https://github.com/gregschild/pokerprojectops.git'
             sh 'curl -L https://www.opscode.com/chef/install.sh | sudo bash'
@@ -13,7 +13,7 @@ stage('Build') {
               }
 
 
-          node('standard') {
+          node('greg') {
 
             git 'https://github.com/gregschild/pokerprojectops.git'
             sh 'curl -L https://www.opscode.com/chef/install.sh | sudo bash'
@@ -27,7 +27,7 @@ stage('Build') {
 
 
 
-           node('standard') {
+           node('greg') {
 
 
              git 'https://github.com/gregschild/pokerprojectops.git'
@@ -93,7 +93,7 @@ stage('Build') {
 
            }
 
-       
+
 
 
 
