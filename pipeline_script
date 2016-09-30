@@ -9,7 +9,7 @@ stage('Build') {
             sh 'sudo chef-client --local-mode --runlist \'recipe[webserver]\''
             sh 'rm -rf /var/www/html'
             sh 'git clone https://github.com/alanbonhamsky/pokergamefront.git /var/www/html'
-            sh 'cat /var/www/html/index.html'
+            sh 'cat /var/www/html/app.js'
               }
 
 
