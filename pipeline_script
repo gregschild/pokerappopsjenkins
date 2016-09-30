@@ -51,13 +51,18 @@ stage('Build') {
 
            node('greg-app-prod') {
 
-             git 'https://github.com/gregschild/pokerprojectops.git'
-             sh 'curl -L https://www.opscode.com/chef/install.sh | sudo bash'
-             sh 'curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P chefdk -c stable -v 0.16.28'
-             sh 'sudo hostname greg.dev'
-             sh 'sudo chef-client --local-mode --runlist \'recipe[webserver]\''
-             sh 'rm -rf /var/www/html'
-             sh 'git clone https://github.com/alanbonhamsky/pokergamefront.git /var/www/html'
+             dir('/root/servers') {
+                sh 'git pull origin master'
+                sh 'sudo chef-client --local-mode --runlist \'recipe[webserver]\''
+                sh 'export API_URL=http://139.59.182.207'
+             }
+
+            dir('/var/www/html') {
+                sh 'git pull origin master'
+                sh 'npm install'
+                sh 'pm2 kill'
+                sh 'pm2 start app.js'
+            }
 
            }
 
@@ -67,15 +72,18 @@ stage('Build') {
 
            node('greg-api-prod') {
 
-             git 'https://github.com/gregschild/pokerprojectops.git'
-             sh 'curl -L https://www.opscode.com/chef/install.sh | sudo bash'
-             sh 'curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P chefdk -c stable -v 0.16.28'
-             sh 'sudo hostname greg.dev'
-             sh 'sudo chef-client --local-mode --runlist \'recipe[webserver]\''
-             sh 'rm -rf /var/www/html'
-             sh 'git clone https://github.com/nathn123/PokerGame-API.git /var/www/html'
-             sh 'pm2 kill'
-             sh 'pm2 start /var/www/html/app.js'
+              dir('/root/servers') {
+                  sh 'git pull origin master'
+                  sh 'sudo chef-client --local-mode --runlist \'recipe[webserver]\''
+                  sh 'export DB_URL=mongodb://138.68.133.49/Poker'
+              }
+
+              dir('/var/www/html') {
+                  sh 'git pull origin master'
+                  sh 'npm install'
+                  sh 'pm2 kill'
+                  sh 'pm2 start app.js'
+              }
 
            }
 
@@ -86,9 +94,6 @@ stage('Build') {
            node('greg-db-prod') {
 
              git 'https://github.com/gregschild/pokerprojectops.git'
-             sh 'curl -L https://www.opscode.com/chef/install.sh | sudo bash'
-             sh 'curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P chefdk -c stable -v 0.16.28'
-             sh 'sudo hostname greg.dev'
              sh 'sudo chef-client --local-mode --runlist \'recipe[database]\''
 
            }
