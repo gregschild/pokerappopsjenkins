@@ -49,7 +49,7 @@ stage('Build') {
 
 
 
-           node('greg-app-prod') {
+           node('production-greg') {
 
            sh 'curl -L https://www.opscode.com/chef/install.sh | sudo bash'
            sh 'curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P chefdk -c stable -v 0.16.28'
